@@ -51,6 +51,16 @@ export const authOptions: NextAuthOptions = {
             }
         })
         //done with credentials
-    ]
+    ],
+    callbacks:{
+      
+    },
+    pages:{
+        signIn:'/sign-in',
+    },
+    session:{
+        strategy:'jwt'
+    },
+    secret:process.env.NEXT_AUTH_SECRET
 
 }
