@@ -53,7 +53,22 @@ export const authOptions: NextAuthOptions = {
         //done with credentials
     ],
     callbacks:{
-      
+        async session({ session,  token }) {
+        
+             if(token ){
+                session.user.id=token.id as string;
+                session.user.username=token.username as string;
+            }
+            return session
+          },
+          async jwt({ token,user  }) {//user is returned from cred
+            if(user){
+                token.id = user.id?.toString()
+                token.username=user.username?.toString()
+                token.email=user.email?.toString()
+            }
+            return token
+          }
     },
     pages:{
         signIn:'/sign-in',
